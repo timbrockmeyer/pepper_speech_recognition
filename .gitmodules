@@ -1,0 +1,3 @@
+[submodule "raspberry_pi/respeaker_ros"]
+	path = raspberry_pi/respeaker_ros
+	url = git@github.com:timbrockmeyer/respeaker_ros.git

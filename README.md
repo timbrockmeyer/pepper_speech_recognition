@@ -100,13 +100,13 @@ Contrary to the Google Live Streaming Mode, here we need to handle cutting the a
 
 This uses an older public Google API endpoint, which at the time or writing still works and does not require an API key. It might get rate limited, perform slowly or be completely removed in the future. Otherwise performs like the method above. Launch via:
 
-``bash /home/pi/respeaker_ros/launch_helper_scripts/google_legacy_single_utterance(free_public_api).sh```
+```bash /home/pi/respeaker_ros/launch_helper_scripts/google_legacy_single_utterance(free_public_api).sh```
    
 ### IBM Single Utterance
 
 Uses IBM Watson as cloud backend, so you will need credentials (see Credentials). You can probably still get some through the Study Project. Otherwise works like the Google Single Utterance Mode. Launch via:
 
-``bash /home/pi/respeaker_ros/launch_helper_scripts/ibm_single_utterance.sh```
+```bash /home/pi/respeaker_ros/launch_helper_scripts/ibm_single_utterance.sh```
 
 ### SNIPS.AI
 
@@ -114,13 +114,13 @@ At the time of writing, there is not a lot to choose from for offline speech rec
 
 Under the hood, we disable snips' own voice activation detection via its mosquitto/MQTT API endpoints "hermes/asr/startListening" and "hermes/asr/stopListening" in order to use the same code we use for the cloud single utterance modes. You can run it via:
 
-``bash /home/pi/respeaker_ros/launch_helper_scripts/snips.sh```
+```bash /home/pi/respeaker_ros/launch_helper_scripts/snips.sh```
    
 ### SILENT MODE
 
 This runs all the capabilities of the [furushchev/respeaker_ros](https://github.com/furushchev/respeaker_ros/) minus the speech recognition, just in case you ever want it to interface with completely different non-python speech recognition solutions or different versions of python that are incompatible with [furushchev/respeaker_ros](https://github.com/furushchev/respeaker_ros/) - such as most likely IBM's API in the future.
 
-``bash /home/pi/respeaker_ros/launch_helper_scripts/silent.sh```
+```bash /home/pi/respeaker_ros/launch_helper_scripts/silent.sh```
    
    
 Note: We got IBM's Live Streaming Service to run with many workarounds, but performance was worse than Google's and we would not have been able to provide a compatible version on our all-in-one raspberry image.

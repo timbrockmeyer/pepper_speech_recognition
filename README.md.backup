@@ -10,7 +10,8 @@ It is strongly advised that you use our provided raspberry pi or recreate its sd
 
 Connect to your pepper via your favorite console, at the time of writing this would be:
 
-```ssh nao@192.168.1.100```
+```ssh nao@192.168.1.100
+   ```
 
 It is helpful to use a tool like [screen](https://www.gnu.org/software/screen/) or [tmux](https://learnxinyminutes.com/docs/tmux/) to make the connection so that it survives flaky wifi disconnects. On normal ssh connections, your executed programs terminate or break horribly on disconnects.
 

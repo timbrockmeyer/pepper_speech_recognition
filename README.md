@@ -16,15 +16,13 @@ It is helpful to use a tool like [screen](https://www.gnu.org/software/screen/) 
 
 The contents of this repository's "pepper" directory are lying directly in pepper/lou's home directory /home/nao. You can use our all-in-one launch script to launch all processes in a single terminal via 
 
-```bash /home/nao/speech_recognition_v2/_LAUNCH_ALL_needs_fresh_ssh_console.sh
-```
+```bash /home/nao/speech_recognition_v2/_LAUNCH_ALL_needs_fresh_ssh_console.sh```
 
 This should launch the ROS core on pepper and all python bridge scripts to bridge it to naoqi. Pepper is now ready to communicate with our raspberry speech recognition scripts or any other future ROS work you may come up with.
 
 To shut down the ROS core and all of our pepper scripts, we provide the utility script
 
-```bash /home/nao/speech_recognition_v2/_KILL_ALL.sh
-```
+```bash /home/nao/speech_recognition_v2/_KILL_ALL.sh```
 
 ## Raspberry Side: 
 
@@ -34,27 +32,23 @@ Make sure that the respeaker microphone is connected to the pi - with a USB cabl
 
 Set pepper as the ROS master:
 
-```bash /home/pi/respeaker_ros/launch_helper_scripts/_SET_PEPPER_AS_ROS_MASTER.sh
-   ```
+```bash /home/pi/respeaker_ros/launch_helper_scripts/_SET_PEPPER_AS_ROS_MASTER.sh```
    
 We recommend that you use Google live streaming, as it gives the best performance by far. At the time of writing, you get 60 minutes of free audio transcription on the free tier as well. You will have to sign up at Google and create a project and credentials, which will net you a .json credential file, which you should place into the home directory of the pi with the filename: /home/pi/googleCloudSpeechCredentials.json 
 
 Then you can launch the script via: 
 
-```bash /home/pi/respeaker_ros/launch_helper_scripts/google_cloud_livestream.sh
-   ```
+```bash /home/pi/respeaker_ros/launch_helper_scripts/google_cloud_livestream.sh```
    
 The script should run indefinitely until you kill it via CTRL+C.
 
 In case you simply do not have any cloud credentials, you can run the purely offline snips model instead:
 
-```bash /home/pi/respeaker_ros/launch_helper_scripts/snips.sh
-   ```
+```bash /home/pi/respeaker_ros/launch_helper_scripts/snips.sh```
 
 You can also try Google's public API endpoint, which they might shut down at any time:
 
-``bash /home/pi/respeaker_ros/launch_helper_scripts/google_legacy_single_utterance(free_public_api).sh
-   ```
+``bash /home/pi/respeaker_ros/launch_helper_scripts/google_legacy_single_utterance(free_public_api).sh```
    
 # Cloud Credentials (required on the raspberry pi)
 
@@ -62,9 +56,7 @@ For Google: At the time of writing, you get 60 minutes of free audio transcripti
 
 For Watson: Sign up and generate your credentials and API key, then set them as an environment variable on the rapsberry pi:
 
-```export IBM_API=XXXyourAPIkeyXXX &&
-source ~/.bashrc
-```
+```export IBM_API=XXXyourAPIkeyXXX && source ~/.bashrc```
 
 
 # Description and Usage
@@ -75,10 +67,8 @@ The scripts enable Pepper to run as a standalone ROS core and feed recognized sp
 
 We also mute Pepper's internal microphone via ALSA/amixer so that Pepper's internal microphones are not listening and interfering with everything as well. We further expose a ROS node /microphone_volume by which one can mute and unmute pepper's internal microphones. Our raspberry pi side scripts make use of this automatically. Examples to use it manually with volume values from 0-100, representing mute and max volume respectively:
 
-```
-rostopic pub --once /microphone_volume std_msgs/Int32 0
-rostopic pub --once /microphone_volume std_msgs/Int32 100
-```
+```rostopic pub --once /microphone_volume std_msgs/Int32 0
+rostopic pub --once /microphone_volume std_msgs/Int32 100```
 
 Ultimately, this also allows you to easily work with Pepper as a ROS master, come up with your own speech recognition solutions on whatever hardware and publish the results via ROS to /recognized_speech, see whether Pepper is speaking under /pepper_speech_status
 
@@ -96,29 +86,25 @@ The raspberry side of the code uses [furushchev/respeaker_ros](https://github.co
 
 This outsources all the heavy lifting to Google and gives the best results by far. Audio is continously piped to Google, so the detection of starting and stopping of utterances is left to Google, outperforming the on-board respeaker or snips libraries in this task as well. While Pepper is speaking (detected via ALTextToSpeech/Status on Pepper and bridged via ROS by our code), zeroes are piped into the audio stream in real time to prevent Pepper from hearing itself. At the time of writing, Google's live streaming service is limited to 5 minute continuous sessions at a time, and their provided workaround was not functional. We worked around it by restarting the service every 5 minutes, which results in a tiny downtime every 300 seconds, but worked flawlessly otherwise. This is the recommended mode to use (do not forget credentials) via:
 
-```bash /home/pi/respeaker_ros/launch_helper_scripts/google_cloud_livestream.sh
-   ```
+```bash /home/pi/respeaker_ros/launch_helper_scripts/google_cloud_livestream.sh```
    
 ### Google Single Utterance Mode
 
 Contrary to the Google Live Streaming Mode, here we need to handle cutting the audio according to the start and the end of an utterance ourselves. We use the respeaker library and [Uberi/speech_recognition](https://github.com/Uberi/speech_recognition) for this task, additionally we make a custom cut whenever Pepper starts speaking. This mode might pose a better pricing model or a better solution where internet uplink is not good enough for continuous streaming. Launch it via:
 
-```bash /home/pi/respeaker_ros/launch_helper_scripts/google_cloud_single_utterance.sh
-   ```
+```bash /home/pi/respeaker_ros/launch_helper_scripts/google_cloud_single_utterance.sh```
 
 ### Google Single Utterance LEGACY Mode
 
 This uses an older public Google API endpoint, which at the time or writing still works and does not require an API key. It might get rate limited, perform slowly or be completely removed in the future. Otherwise performs like the method above. Launch via:
 
-``bash /home/pi/respeaker_ros/launch_helper_scripts/google_legacy_single_utterance(free_public_api).sh
-   ```
+``bash /home/pi/respeaker_ros/launch_helper_scripts/google_legacy_single_utterance(free_public_api).sh```
    
 ### IBM Single Utterance
 
 Uses IBM Watson as cloud backend, so you will need credentials (see Credentials). You can probably still get some through the Study Project. Otherwise works like the Google Single Utterance Mode. Launch via:
 
-``bash /home/pi/respeaker_ros/launch_helper_scripts/ibm_single_utterance.sh
-   ```
+``bash /home/pi/respeaker_ros/launch_helper_scripts/ibm_single_utterance.sh```
 
 ### SNIPS.AI
 
@@ -126,15 +112,13 @@ At the time of writing, there is not a lot to choose from for offline speech rec
 
 Under the hood, we disable snips' own voice activation detection via its mosquitto/MQTT API endpoints "hermes/asr/startListening" and "hermes/asr/stopListening" in order to use the same code we use for the cloud single utterance modes. You can run it via:
 
-``bash /home/pi/respeaker_ros/launch_helper_scripts/snips.sh
-   ```
+``bash /home/pi/respeaker_ros/launch_helper_scripts/snips.sh```
    
 ### SILENT MODE
 
 This runs all the capabilities of the [furushchev/respeaker_ros](https://github.com/furushchev/respeaker_ros/) minus the speech recognition, just in case you ever want it to interface with completely different non-python speech recognition solutions or different versions of python that are incompatible with [furushchev/respeaker_ros](https://github.com/furushchev/respeaker_ros/) - such as most likely IBM's API in the future.
 
-``bash /home/pi/respeaker_ros/launch_helper_scripts/silent.sh
-   ```
+``bash /home/pi/respeaker_ros/launch_helper_scripts/silent.sh```
    
    
 Note: We got IBM's Live Streaming Service to run with many workarounds, but performance was worse than Google's and we would not have been able to provide a compatible version on our all-in-one raspberry image.
@@ -146,24 +130,18 @@ Note: We got IBM's Live Streaming Service to run with many workarounds, but perf
 
 Our scripts mute Pepper's internal microphone by setting the ALSA microphone volume to zero (from a scale of 0-100): 
 
-```
-amixer sset Capture 0
-```
+```amixer sset Capture 0```
 
 After trying around with pulseaudio and undocumented NaoQi C++ endpoints for a long time, this is the one method we finally found as working in order to mute Pepper's microphones. If, after running our scripts and terminating them, you end up with a deaf Pepper, you may have to set them to the default value of 40 again:
 
 On Pepper directly:
 
-```
-amixer sset Capture 0
-```
+```amixer sset Capture 0```
 
 or via our provided ROS endpoint:
 
 
-```
-rostopic pub --once /microphone_volume std_msgs/Int32 40
-```
+```rostopic pub --once /microphone_volume std_msgs/Int32 40```
 
 We found that a reboot always resulted in a functioning Pepper microphone at the default value. It would still be good for everyone working on Pepper to be aware of this in case it ever needs to manually be set due to some bug.
 

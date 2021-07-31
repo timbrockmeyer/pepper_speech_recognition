@@ -67,8 +67,10 @@ The scripts enable Pepper to run as a standalone ROS core and feed recognized sp
 
 We also mute Pepper's internal microphone via ALSA/amixer so that Pepper's internal microphones are not listening and interfering with everything as well. We further expose a ROS node /microphone_volume by which one can mute and unmute pepper's internal microphones. Our raspberry pi side scripts make use of this automatically. Examples to use it manually with volume values from 0-100, representing mute and max volume respectively:
 
-```rostopic pub --once /microphone_volume std_msgs/Int32 0
-rostopic pub --once /microphone_volume std_msgs/Int32 100```
+```
+rostopic pub --once /microphone_volume std_msgs/Int32 0
+rostopic pub --once /microphone_volume std_msgs/Int32 100
+```
 
 Ultimately, this also allows you to easily work with Pepper as a ROS master, come up with your own speech recognition solutions on whatever hardware and publish the results via ROS to /recognized_speech, see whether Pepper is speaking under /pepper_speech_status
 
@@ -139,7 +141,6 @@ On Pepper directly:
 ```amixer sset Capture 0```
 
 or via our provided ROS endpoint:
-
 
 ```rostopic pub --once /microphone_volume std_msgs/Int32 40```
 

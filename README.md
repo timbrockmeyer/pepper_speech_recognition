@@ -48,7 +48,7 @@ In case you simply do not have any cloud credentials, you can run the purely off
 
 You can also try Google's public API endpoint, which they might shut down at any time:
 
-``bash /home/pi/respeaker_ros/launch_helper_scripts/google_legacy_single_utterance(free_public_api).sh```
+```bash /home/pi/respeaker_ros/launch_helper_scripts/google_legacy_single_utterance(free_public_api).sh```
    
 # Cloud Credentials (required on the raspberry pi)
 

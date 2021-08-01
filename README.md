@@ -96,6 +96,8 @@ For Watson: Sign up and generate your credentials and API key, then set it as an
 
 ```export IBM_API=XXXyourAPIkeyXXX && source ~/.bashrc```
 
+Older versions of Google's APIs required you to set an environment variable "GOOGLE_APPLICATION_CREDENTIALS" containing the path to the .json file, but this is no longer the case.
+
 It might be a good idea to remove your credentials once you are done working with Pepper, just in case. You can edit ~/.bashrc with nano or vim to remove the IBM credentials.
 
 

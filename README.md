@@ -1,4 +1,4 @@
-Code from SS 2019 to allow the UOS Pepper/Lou robot to use an external microphone [Respeaker Mic Array v2.0](https://wiki.seeedstudio.com/ReSpeaker_Mic_Array_v2.0/) coupled with a raspberry pi for cloud and offline speech recognition instead of Pepper's own internal (very flawed) microphone array.
+Code from SS 2019 to allow the UOS Pepper robot to use an external microphone [Respeaker Mic Array v2.0](https://wiki.seeedstudio.com/ReSpeaker_Mic_Array_v2.0/) coupled with a raspberry pi for cloud and offline speech recognition instead of Pepper's own internal (very flawed) microphone array.
 
 <!-- TABLE OF CONTENTS -->
 <details open="open">
@@ -42,13 +42,13 @@ It is strongly advised that you use our provided raspberry pi or recreate its sd
 
 ## Pepper Side:
 
-Connect to your pepper from your device via your favorite console, at the time of writing, for UOS Pepper/Lou, this would be:
+Connect to your pepper from your device via your favorite console, at the time of writing, for UOS Pepper, this would be:
 
 ```ssh nao@192.168.1.100```
 
 It is helpful to use a tool like [screen](https://www.gnu.org/software/screen/) or [tmux](https://learnxinyminutes.com/docs/tmux/) to make the connection so that it survives flaky wifi disconnects. On normal ssh connections, your executed programs terminate or break horribly on disconnects.
 
-The contents of this repository's "pepper" directory are lying directly in pepper/lou's home directory /home/nao. You can use our all-in-one launch script to launch all processes in a single terminal via:
+The contents of this repository's "pepper" directory are lying directly in pepper's home directory /home/nao. You can use our all-in-one launch script to launch all processes in a single terminal via:
 
 ```bash /home/nao/speech_recognition_v2/_LAUNCH_ALL_needs_fresh_ssh_console.sh```
 

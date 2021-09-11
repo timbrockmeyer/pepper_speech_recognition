@@ -180,17 +180,11 @@ Our scripts mute Pepper's internal microphone by setting the microphone volume i
 
 ```amixer sset Capture 0```
 
-After trying around with pulseaudio and undocumented NaoQi C++ endpoints for a long time, this is the one working method we finally found to mute Pepper's microphones. If, after running our scripts and terminating them, you end up with a deaf Pepper, you may have to set them to the default value of 40 again by hand:
-
-On Pepper directly:
-
-```amixer sset Capture 0```
-
 or via our provided ROS endpoint:
 
 ```rostopic pub --once /microphone_volume std_msgs/Int32 40```
 
-We found that a reboot always resulted in a functioning Pepper microphone at the default value so this should hardly pose a problem. It would still be good for everyone working on Pepper to be aware of this in case it ever needs to manually be set due to some bug.
+After trying around with pulseaudio and undocumented NaoQi C++ endpoints for a long time, this is the one working method we finally found to mute Pepper's microphones. However, after running our scripts and terminating them, you may find that you can not set the Capture Value back to the Pepper default of 235% since Aldebaran uses some dark magic to do raise it above 100%. You have to reboot Pepper before you can reliably work with its internal microphones again, as everything is reliably set back to default at boot.
 
 ## Changing the sensitivity of the voice activaty detection
 

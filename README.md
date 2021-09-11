@@ -42,7 +42,7 @@ It is strongly advised that you use our provided raspberry pi or recreate its sd
 
 ## Pepper Side:
 
-Connect to your pepper from your device via your favorite console, at the time of writing, for UOS Pepper, this would be:
+The Pepper side needs to be run first since it acts as the ROS master / roscore. Connect to your pepper from your device via your favorite console, at the time of writing, for UOS Pepper, this would be:
 
 ```ssh nao@192.168.1.100```
 
@@ -64,7 +64,11 @@ Although we did not find any trouble, if you encounter any, it might be a good i
 
 The content of the repository linked in this repository's "raspberry_pi" directory lie directly in the home directory of the companion raspberry pi in /home/pi
 
-Make sure that the respeaker microphone is connected to the pi - with a USB cable that actually has data lines and not only power lines.
+Make sure that the respeaker microphone is connected to the pi - with a USB cable that actually has data lines and not only power lines. The Raspberry Pi OS runs in headless mode - no graphical desktop environment is installed in order to save on resources. Hence you need no HDMI cable or mouse/keyboard and have to control it via SSH over Pepper's dedicated router network. By default the Pi assumes the static IP of 192.168.1.140, hence you log in from your device via:
+
+```ssh pi@192.168.1.140```
+
+You will have to get the password from the study project.
 
 Set pepper as the ROS master:
 

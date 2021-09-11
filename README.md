@@ -191,3 +191,7 @@ or via our provided ROS endpoint:
 ```rostopic pub --once /microphone_volume std_msgs/Int32 40```
 
 We found that a reboot always resulted in a functioning Pepper microphone at the default value so this should hardly pose a problem. It would still be good for everyone working on Pepper to be aware of this in case it ever needs to manually be set due to some bug.
+
+## Changing the sensitivity of the voice activaty detection
+
+There is more info in the readme of the respeaker module, a first stop would be to play around with the parameters VOICEACTIVITY and SPEECHDETECTED in tuning.py or the recognizer_instance.energy_threshold of the SpeechRecognition library if you are using it.
